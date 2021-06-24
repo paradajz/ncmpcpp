@@ -234,8 +234,6 @@ void PlaylistEditor::mouseButtonPressed(MEVENT me)
 		if (size_t(me.y) < Playlists.size() && (me.bstate & (BUTTON1_PRESSED | BUTTON3_PRESSED)))
 		{
 			Playlists.Goto(me.y);
-			if (me.bstate & BUTTON3_PRESSED)
-				addItemToPlaylist(false);
 		}
 		else
 			Screen<WindowType>::mouseButtonPressed(me);
@@ -253,8 +251,6 @@ void PlaylistEditor::mouseButtonPressed(MEVENT me)
 		if (size_t(me.y) < Content.size() && (me.bstate & (BUTTON1_PRESSED | BUTTON3_PRESSED)))
 		{
 			Content.Goto(me.y);
-			bool play = me.bstate & BUTTON3_PRESSED;
-			addItemToPlaylist(play);
 		}
 		else
 			Screen<WindowType>::mouseButtonPressed(me);
@@ -546,7 +542,6 @@ void PlaylistEditor::locateSong(const MPD::Song &s)
 
 	if (locate_song_in_current_playlist(Content.currentV() + 1, Content.endV()))
 		return;
-	Statusbar::print("Jumping to song...");
 	if (locate_song_in_playlists(Playlists.currentV() + 1, Playlists.endV()))
 		return;
 	if (locate_song_in_playlists(Playlists.beginV(), Playlists.currentV()))

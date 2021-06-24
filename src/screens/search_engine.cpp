@@ -228,11 +228,6 @@ void SearchEngine::mouseButtonPressed(MEVENT me)
 		if ((me.bstate & BUTTON3_PRESSED)
 		    && w.choice() < StaticOptions)
 			runAction();
-		else if (w.choice() >= StaticOptions)
-		{
-			bool play = me.bstate & BUTTON3_PRESSED;
-			addItemToPlaylist(play);
-		}
 	}
 	else
 		Screen<WindowType>::mouseButtonPressed(me);

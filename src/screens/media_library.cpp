@@ -523,8 +523,6 @@ void MediaLibrary::mouseButtonPressed(MEVENT me)
 		if (size_t(me.y) < Tags.size() && (me.bstate & (BUTTON1_PRESSED | BUTTON3_PRESSED)))
 		{
 			Tags.Goto(me.y);
-			if (me.bstate & BUTTON3_PRESSED)
-				addItemToPlaylist(false);
 		}
 		else
 			Screen<WindowType>::mouseButtonPressed(me);
@@ -546,8 +544,6 @@ void MediaLibrary::mouseButtonPressed(MEVENT me)
 		if (size_t(me.y) < Albums.size() && (me.bstate & (BUTTON1_PRESSED | BUTTON3_PRESSED)))
 		{
 			Albums.Goto(me.y);
-			if (me.bstate & BUTTON3_PRESSED)
-				addItemToPlaylist(false);
 		}
 		else
 			Screen<WindowType>::mouseButtonPressed(me);
@@ -560,8 +556,6 @@ void MediaLibrary::mouseButtonPressed(MEVENT me)
 		if (size_t(me.y) < Songs.size() && (me.bstate & (BUTTON1_PRESSED | BUTTON3_PRESSED)))
 		{
 			Songs.Goto(me.y);
-			bool play = me.bstate & BUTTON3_PRESSED;
-			addItemToPlaylist(play);
 		}
 		else
 			Screen<WindowType>::mouseButtonPressed(me);
@@ -1018,7 +1012,6 @@ void MediaLibrary::locateSong(const MPD::Song &s)
 	
 	if (myScreen != this)
 		switchTo();
-	Statusbar::put() << "Jumping to song...";
 	Global::wFooter->refresh();
 
 	if (!hasTwoColumns)
