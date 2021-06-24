@@ -219,14 +219,11 @@ void Browser::mouseButtonPressed(MEVENT me)
 			case MPD::Item::Type::Directory:
 				if (me.bstate & BUTTON1_PRESSED)
 					enterDirectory();
-				else
-					addItemToPlaylist(false);
 				break;
 			case MPD::Item::Type::Playlist:
 			case MPD::Item::Type::Song:
 			{
 				bool play = me.bstate & BUTTON3_PRESSED;
-				addItemToPlaylist(play);
 				break;
 			}
 		}

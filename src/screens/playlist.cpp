@@ -138,8 +138,6 @@ void Playlist::mouseButtonPressed(MEVENT me)
 		if (size_t(me.y) < w.size() && (me.bstate & (BUTTON1_PRESSED | BUTTON3_PRESSED)))
 		{
 			w.Goto(me.y);
-			if (me.bstate & BUTTON3_PRESSED)
-				addItemToPlaylist(true);
 		}
 		else
 			Screen<WindowType>::mouseButtonPressed(me);
