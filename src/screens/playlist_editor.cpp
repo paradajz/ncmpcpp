@@ -173,8 +173,11 @@ void PlaylistEditor::update()
 			}
 			if (idx < Playlists.size())
 				Playlists.resizeList(idx);
-			std::sort(Playlists.beginV(), Playlists.endV(),
-			          LocaleBasedSorting(std::locale(), Config.ignore_leading_the));
+			std::sort(Playlists.beginV(),
+					  Playlists.endV(),
+			          LocaleBasedSorting(std::locale(),
+					  					Config.ignore_leading_the,
+										true));
 		}
 	}
 
