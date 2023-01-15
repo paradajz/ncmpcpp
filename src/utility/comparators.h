@@ -31,10 +31,14 @@ class LocaleStringComparison
 {
 	std::locale m_locale;
 	bool m_ignore_the;
+	bool m_reverse = false;
 	
 public:
-	LocaleStringComparison(const std::locale &loc, bool ignore_the)
-	: m_locale(loc), m_ignore_the(ignore_the) { }
+	LocaleStringComparison(const std::locale &loc, bool ignore_the, bool reverse = false)
+	: m_locale(loc)
+	, m_ignore_the(ignore_the)
+	, m_reverse(reverse)
+	{}
 
 	int operator()(const char *a, const char *b) const {
 		return compare(a, strlen(a), b, strlen(b));
@@ -51,7 +55,9 @@ class LocaleBasedSorting
 	LocaleStringComparison m_cmp;
 	
 public:
-	LocaleBasedSorting(const std::locale &loc, bool ignore_the) : m_cmp(loc, ignore_the) { }
+	LocaleBasedSorting(const std::locale &loc, bool ignore_the, bool reverse = false)
+		: m_cmp(loc, ignore_the, reverse)
+		{}
 	
 	bool operator()(const std::string &a, const std::string &b) const {
 		return m_cmp(a, b) < 0;

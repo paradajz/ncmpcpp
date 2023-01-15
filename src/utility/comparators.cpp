@@ -46,8 +46,16 @@ int LocaleStringComparison::compare(const char *a, size_t a_len, const char *b, 
 		if (hasTheWord(b))
 			bc_off += 4;
 	}
+
+	if (!m_reverse)
+	{
+		return std::use_facet<std::collate<char>>(m_locale).compare(
+			a+ac_off, a+a_len, b+bc_off, b+b_len
+		);
+	}
+
 	return std::use_facet<std::collate<char>>(m_locale).compare(
-		a+ac_off, a+a_len, b+bc_off, b+b_len
+			b+bc_off, b+b_len, a+ac_off, a+a_len
 	);
 }
 
